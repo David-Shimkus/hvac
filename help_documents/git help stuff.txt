@@ -1,0 +1,26 @@
+---To acquire our stuffs
+$ git clone https://devel.cs.siue.edu/git/sp_f16s17_hvacsmartdev.git folderName/
+
+
+---To push to master
+$ git pull 		--OPTIONAL STEP BUT SORT OF IMPORTANT TO SYNC WITH REMOTE FIRST
+$ git status
+$ git add [FILE YOU WANTY ADDED, repeat for all necessary files]
+$ git commit -m "Informative message here"
+$ git push origin [BRANCH NAME]
+
+
+--To create a new branch
+$ git checkout -b [name_of_your_new_branch]
+$ git push origin [name_of_your_new_branch]
+
+
+---To change branch
+$ git fetch
+$ git checkout branchName
+
+
+--To delete a branch
+$ git push origin :branchName
+
+

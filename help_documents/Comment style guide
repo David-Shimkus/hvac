@@ -1,0 +1,15 @@
+Comment style guide
+
+
+ basic inline comment making a note about functionality: //
+
+ block comment that goes in depth about certain functionality: /* "Comment text" */
+
+ added to the ending braces of a function: //ENDING "function name"
+
+ optional brief comment about what a function does: //FUNCTION "description"
+
+ To Dos: //TODO “stuff you need to do”
+
+ 
+
