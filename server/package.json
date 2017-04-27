@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.4.2",
+    "assert": "^1.4.1",
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "cassandra-driver": "^3.1.1",
+    "express": "^4.14.0",
+    "forecast.io": "0.0.9",
+    "node-forge": "^0.6.42",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "socket.io": "^1.4.8"
+  }
+}

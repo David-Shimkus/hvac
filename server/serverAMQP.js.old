@@ -1,0 +1,143 @@
+// Filename: server.js
+// Project HVAC Smart Dev
+//
+// Revisions:
+// ??-??-???? | Alec Beyer    | Creation.
+// 03/28/2017 | David Shimkus | Added comment at top.
+
+var amqp = require('amqplib/callback_api.js');
+var forge = require('node-forge');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var assert = require('assert');
+var Promise = require('bluebird');
+
+var minutes = 60, the_interval = minutes * 60 * 1000;
+//Lets require/import the HTTP module
+var http = require('http');
+
+//Lets define a port we want to listen to
+const PORT=8080; 
+
+//We need a function which handles requests and send response
+function handleRequest(request, response){
+    console.log("Server Hit");
+    response.end('Path Hit: ' + request.url);
+}
+
+//Create a server
+var server = http.createServer(handleRequest);
+
+//Forecast.io api module
+var ForecastIO = require('forecast.io');
+var options = {APIKey: '38d6d8bc6b9faa0425447a64a6279460'},latitude = 38.886749, longitude = -89.389459;
+var forecast = new ForecastIO(options);
+//Historical weather url
+// https://api.darksky.net/forecast/38d6d8bc6b9faa0425447a64a6279460/38.886749,-89.389459,1200000000
+
+/* Parses JSON object to be more readable */
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.set('json spaces', 2);
+
+/* Setting headers and metadata for JSON */
+app.use(function(req, res, next){
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+	res.header('Content-Type', 'application/vnd.api+json');
+	next();
+});
+
+// Function to publish to the amqp server
+var publish = function(msg, key){
+	amqp.connect('amqp://cloud.enertechgeo.com', function(err, conn){
+		conn.createChannel(function(err, ch){
+			var ex = 'graphite';
+			ch.assertExchange(ex, 'topic', {durable: true});
+			ch.publish(ex, key, new Buffer(msg));
+			console.log(" [x] Sent %x", msg);
+		});
+	});
+};
+
+// Function to subscribe to the amqp server
+var subscribe = function(key){
+	amqp.connect('amqp://cloud.enertechgeo.com', function(err, conn) {
+  		conn.createChannel(function(err, ch) {
+    			var ex = 'graphite';
+    			ch.assertExchange(ex, 'topic', {durable: true});
+    			ch.assertQueue('', {exclusive: true}, function(err, q) {
+      				console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q.queue);
+      				ch.bindQueue(q.queue, ex, key);
+      				ch.consume(q.queue, function(msg) {
+        				console.log(" [x] %s", msg.content.toString());
+      				}, {noAck: true});
+    			});
+  		});
+	});
+};
+
+
+/* Subscribing to the amqp server for real time data updates */
+amqp.connect('amqp://cloud.enertechgeo.com', function(err, conn) {
+  conn.createChannel(function(err, ch) {
+    var ex = 'graphite';
+
+    ch.assertExchange(ex, 'topic', {durable: true});
+
+    ch.assertQueue('', {exclusive: true}, function(err, q) {
+      ch.bindQueue(q.queue, ex, "WV.002B.sensors.outdoor");
+
+      ch.consume(q.queue, function(msg) {
+        console.log(" [x] %s", msg.content.toString());
+        var string = msg.content.toString().split(" ");
+      }, {noAck: true});
+    });
+  });
+});
+
+
+/* API routes and functions */
+app.get('/api', function(req, res){
+	res.send('GET /api endpoint working!');
+});
+
+app.post('/api', function(req,res){
+	console.log('POST contents: ' + JSON.stringify(req.body));
+	res.send('POST /api endpoint working!');
+});
+
+app.get('/api/weather', function(req, res){
+	var options = {exclude:'minutely,flags,alerts'};
+
+	forecast.getAtTime(latitude, longitude, 1447329600, function(err, res, data){
+	if(err)throw err;
+	console.log(JSON.stringify(data,null,2));
+});	
+	
+	res.send(
+		forecast.get(latitude, longitude, options, function(err, res, data){
+		if(err)throw err;
+		//console.log(JSON.stringify(data,null,2));
+		return data;
+	})
+	);
+});
+
+	setInterval(function() {
+  		console.log("I am doing my 5 minutes check");
+  		forecast.get(latitude, longitude, options, function(err, res, data){
+			if(err)throw err;
+			//console.log(JSON.stringify(data,null,2));
+			console.log("hey");
+			console.log(JSON.stringify(data,null,2));
+			return data;
+		})
+	}, the_interval);
+	console.log("Server listening on: http://localhost:%s", PORT);
+    
+
+/* server starts listening */
+app.listen(4500);

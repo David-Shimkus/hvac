@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="predictions.js"></script> 
+
+<div style="text-align: center">
+
+<h1>HVAConnect Demo alpha</h1>
+
+<form action="output.html">
+  Zip:<br>
+  <input type="text" name="zip" value="">
+  <br>
+  Provider:<br>
+  <input type="text" name="provider" value="">
+  <br>
+  Future Timestamp:<br>
+  <input type="text" name="timestamp" value="">
+  <br><br>
+  <input type="submit" value="Submit">
+</form> 
+
+
+<br><br>
+
+Predicted Temp:<br>
+<input id="predictedTemp" type="text">
+<br>
+Predicted Rate:<br>
+<input id="predictedRate" type="text">
+<br>
+Avg Rate for that Day: (HARDCODED)<br>
+<input id="predictedAvgRate" type="text">
+<br>
+Optimization Degree:<br>
+<input id="predictedOptDegree" type="text">
+<br>
+
+</div>
+
+<script type="text/javascript">
+	document.getElementById('predictedTemp').value = findPredictedTemp();
+	document.getElementById('predictedRate').value = findPredictedRate();
+	document.getElementById('predictedAvgRate').value = "0.00001";
+	document.getElementById('predictedOptDegree').value = findOptimization();
+</script>
+
+</body>
+</html> 
+

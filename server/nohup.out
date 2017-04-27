@@ -1,0 +1,59 @@
+listening on port 1234
+getPredictedTemp hit, zip: 62025
+getPredictedTemp weather: 27.6
+getPredictedTemp hit, zip: 62025
+getPredictedTemp weather: 27.6
+getPredictedTemp hit, zip: undefined
+Unhandled rejection TypeError: Cannot call method 'toString' of undefined
+    at /home/pi/git/hvac/predictions/getPredictedTemp.js:27:11
+    at Promise._execute (/home/pi/git/hvac/node_modules/bluebird/js/release/debuggability.js:299:9)
+    at Promise._resolveFromExecutor (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:481:18)
+    at new Promise (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:77:14)
+    at Object.module.exports.getPredictedTemp (/home/pi/git/hvac/predictions/getPredictedTemp.js:24:10)
+    at /home/pi/git/hvac/HVAConnect.js:43:9
+    at Promise._execute (/home/pi/git/hvac/node_modules/bluebird/js/release/debuggability.js:299:9)
+    at Promise._resolveFromExecutor (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:481:18)
+    at new Promise (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:77:14)
+    at Object.module.exports.getPredictedTemp (/home/pi/git/hvac/HVAConnect.js:41:10)
+    at app.post.hvac.getPredictedRate.then.res.send.average (/home/pi/git/hvac/server.js:35:7)
+    at Layer.handle [as handle_request] (/home/pi/git/hvac/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/pi/git/hvac/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/pi/git/hvac/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/pi/git/hvac/node_modules/express/lib/router/layer.js:95:5)
+    at /home/pi/git/hvac/node_modules/express/lib/router/index.js:277:22
+getPredictedTemp hit, zip: undefined
+Unhandled rejection TypeError: Cannot call method 'toString' of undefined
+    at /home/pi/git/hvac/predictions/getPredictedTemp.js:27:11
+    at Promise._execute (/home/pi/git/hvac/node_modules/bluebird/js/release/debuggability.js:299:9)
+    at Promise._resolveFromExecutor (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:481:18)
+    at new Promise (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:77:14)
+    at Object.module.exports.getPredictedTemp (/home/pi/git/hvac/predictions/getPredictedTemp.js:24:10)
+    at /home/pi/git/hvac/HVAConnect.js:43:9
+    at Promise._execute (/home/pi/git/hvac/node_modules/bluebird/js/release/debuggability.js:299:9)
+    at Promise._resolveFromExecutor (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:481:18)
+    at new Promise (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:77:14)
+    at Object.module.exports.getPredictedTemp (/home/pi/git/hvac/HVAConnect.js:41:10)
+    at app.post.hvac.getPredictedRate.then.res.send.average (/home/pi/git/hvac/server.js:35:7)
+    at Layer.handle [as handle_request] (/home/pi/git/hvac/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/pi/git/hvac/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/pi/git/hvac/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/pi/git/hvac/node_modules/express/lib/router/layer.js:95:5)
+    at /home/pi/git/hvac/node_modules/express/lib/router/index.js:277:22
+getPredictedTemp hit, zip: undefined
+Unhandled rejection TypeError: Cannot call method 'toString' of undefined
+    at /home/pi/git/hvac/predictions/getPredictedTemp.js:27:11
+    at Promise._execute (/home/pi/git/hvac/node_modules/bluebird/js/release/debuggability.js:299:9)
+    at Promise._resolveFromExecutor (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:481:18)
+    at new Promise (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:77:14)
+    at Object.module.exports.getPredictedTemp (/home/pi/git/hvac/predictions/getPredictedTemp.js:24:10)
+    at /home/pi/git/hvac/HVAConnect.js:43:9
+    at Promise._execute (/home/pi/git/hvac/node_modules/bluebird/js/release/debuggability.js:299:9)
+    at Promise._resolveFromExecutor (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:481:18)
+    at new Promise (/home/pi/git/hvac/node_modules/bluebird/js/release/promise.js:77:14)
+    at Object.module.exports.getPredictedTemp (/home/pi/git/hvac/HVAConnect.js:41:10)
+    at app.post.hvac.getPredictedRate.then.res.send.average (/home/pi/git/hvac/server.js:35:7)
+    at Layer.handle [as handle_request] (/home/pi/git/hvac/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/pi/git/hvac/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/home/pi/git/hvac/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/pi/git/hvac/node_modules/express/lib/router/layer.js:95:5)
+    at /home/pi/git/hvac/node_modules/express/lib/router/index.js:277:22
